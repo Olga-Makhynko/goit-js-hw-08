@@ -71,15 +71,10 @@ const galleryItemsList = images
     const { preview, original, description } = item;
 
     return `<li class="gallery-item">
-                        <a class="gallery-link" href= ${original}>
-                            <img
-                            class="gallery-image"
-                            src= ${preview}
-                            data-source= ${original}
-                            alt= ${description}
-                            />
-                        </a>
-                    </li>`;
+                     <a class="gallery-link" href="${original}">
+  <img class="gallery-image" src="${preview}" data-source="${original}" alt="${description}" />
+</a>
+                  </li>`;
   })
   .join("");
 
@@ -90,17 +85,9 @@ gallery.addEventListener("click", (event) => {
 
   if (event.target.tagName !== "IMG") return;
   let largeImageUrl = event.target.getAttribute("data-source");
-  const instance = basicLightbox.create(
-    `<img src="${largeImageUrl}" width="1112" height="640">`
-  );
+  const instance = basicLightbox.create(`
+    <img src="${largeImageUrl}" width="1112" height="640">
+  `);
+
   instance.show();
-
-  const hideOnEsc = (event) => {
-    if (event.key === "Escape") {
-      instance.close();
-      document.removeEventListener("keydown", hideOnEsc);
-    }
-  };
-
-  document.addEventListener("keydown", hideOnEsc);
 });
